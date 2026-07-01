@@ -1,0 +1,72 @@
+{
+    "total_distance": 64.5,
+    "average_pace": 5.48,
+    "longest_run": 16.0,
+    "total_runs": 8,
+    "run_history": [
+        {
+            "date": "2026-06-30",
+            "distance": 5.0,
+            "hours": 0,
+            "minutes": 25,
+            "seconds": 30,
+            "pace": 5.1
+        },
+        {
+            "date": "2026-06-30",
+            "distance": 5.0,
+            "hours": 0,
+            "minutes": 25,
+            "seconds": 30,
+            "pace": 5.1
+        },
+        {
+            "date": "2026-06-30",
+            "distance": 10.0,
+            "hours": 0,
+            "minutes": 50,
+            "seconds": 60,
+            "pace": 5.1
+        },
+        {
+            "date": "2026-06-30",
+            "distance": 5.0,
+            "hours": 0,
+            "minutes": 25,
+            "seconds": 30,
+            "pace": 5.1
+        },
+        {
+            "date": "2026-06-30",
+            "distance": 5.0,
+            "hours": 0,
+            "minutes": 25,
+            "seconds": 30,
+            "pace": 5.1
+        },
+        {
+            "date": "2026-07-01",
+            "distance": 6.5,
+            "hours": 0,
+            "minutes": 41,
+            "seconds": 58,
+            "pace": 6.46
+        },
+        {
+            "date": "2026-07-01",
+            "distance": 12.0,
+            "hours": 1,
+            "minutes": 16,
+            "seconds": 18,
+            "pace": 6.36
+        },
+        {
+            "date": "2026-07-01",
+            "distance": 16.0,
+            "hours": 1,
+            "minutes": 28,
+            "seconds": 42,
+            "pace": 5.54
+        }
+    ]
+}

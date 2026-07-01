@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+
+         <meta charset="UTF-8">
+         <title> My Running Tracker </title>  
+         <link rel="stylesheet" href="style.css">
+         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>     
+ </head> 
+
+ <body>
+
+         <h1> My Running Tracker </h1> 
+         <p id="motivation" class="motivation"></p> 
+
+       <div class = "stats" >
+           <div class= "card">
+             <h2> Total Distance </h2>
+             <p id= "totalDistance"> 0 km </p>
+           </div>
+
+          <div class= "card">
+            <h2> Average Pace </h2>
+            <p id= "averagePace"> 0 min/km </p> 
+         </div>
+  
+        <div class="card">
+          <h2> Longest Run </h2>
+          <p id= "longestRun"> 0 km </p> 
+        </div> 
+
+       <div class="card">
+         <h2>Total Runs</h2>
+         <p id="totalRuns">0</p>
+      </div>
+
+   </div> 
+
+      <div class="recent-run">
+             <p>Most Recent Run: <span id="recentDate">-</span></p>
+     </div>
+
+
+     <div class ="graph-section">
+        <h2> Progress Over Time </h2> 
+        <canvas id="progressChart"> </canvas>
+     </div> 
+
+
+       <div class="history-section">
+    <h2>Run History</h2>
+          <table id="runTable">
+                <thead>
+                   <tr>
+                     <th>Date</th>
+                     <th>Distance</th>
+                     <th>Time</th>
+                     <th>Pace</th>
+                  </tr>
+              </thead>
+            <tbody id="runTableBody">
+            </tbody>
+        </table>
+    </div>
+        
+
+  <script>
+    console.log("JavaScript is connected!");
+
+     for (let i = 0; i < 30; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left = Math.random() * 100 + 'vw';
+    sparkle.style.top = Math.random() * 100 + 'vh';
+    sparkle.style.animationDelay = Math.random() * 3 + 's';
+    sparkle.style.width = (Math.random() * 5 + 3) + 'px';
+    sparkle.style.height = sparkle.style.width;
+    document.body.appendChild(sparkle);
+    }
+       
+    fetch('run_stats.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById("totalDistance").textContent = data.total_distance + " km";
+            document.getElementById("averagePace").textContent = data.average_pace + " min/km";
+            document.getElementById("longestRun").textContent = data.longest_run + " km";
+            document.getElementById("totalRuns").textContent = data.total_runs;
+
+           const lastRun = data.run_history[data.run_history.length - 1];
+           document.getElementById("recentDate").textContent = lastRun.date;
+
+           let message = "";
+           if (data.total_distance < 10) {
+           message = "🌟 Every run starts with a single step. Keep going!";
+                } else if (data.total_distance < 30) {
+           message = "🔥 You're building great habits. Stay consistent!";
+                } else if (data.total_distance < 50) {
+           message = "💪 You're crushing it! Keep pushing your limits!";
+                } else {
+           message = "🏆 You're a running machine! Nothing can stop you!";
+                }
+           document.getElementById("motivation").textContent = message;
+
+         const tableBody = document.getElementById("runTableBody");
+
+         data.run_history.forEach(run => {
+         const row = document.createElement("tr");
+         row.innerHTML = `
+             <td>${run.date}</td>
+             <td>${run.distance} km</td>
+             <td>${run.hours}h ${run.minutes}m ${run.seconds}s</td>
+             <td>${run.pace} min/km</td>
+               `;
+           tableBody.appendChild(row);
+         });
+
+           const labels = data.run_history.map(run => run.date);
+           const distances = data.run_history.map(run => run.distance);
+
+            new Chart(document.getElementById("progressChart"), {
+            type: 'line',
+            data: {
+            labels: labels,
+                datasets: [{
+                      label: 'Distance (km)',
+                      data: distances,
+                      borderColor: '#2c3e50',
+                      backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                      tension: 0.3,
+                      fill: true
+                  }]
+                }
+             });
+        });
+</script>
+
+   <div class="runner">
+    <div class="head"></div>
+    <div class="upper-body">
+        <div class="arm left-arm"></div>
+        <div class="body"></div>
+        <div class="arm right-arm"></div>
+    </div>
+    <div class="legs">
+        <div class="leg left-leg"></div>
+        <div class="leg right-leg"></div>
+        </div>
+    </div>
+
+ </body> 
+</html>
