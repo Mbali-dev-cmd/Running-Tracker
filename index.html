@@ -79,7 +79,7 @@
     document.body.appendChild(sparkle);
     }
        
-    fetch('run_stats.json')
+    fetch('https://running-tracker-mbali.s3.us-east-1.amazonaws.com/run_stats.json')
         .then(response => response.json())
         .then(data => {
             console.log(data);
